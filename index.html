@@ -1,37 +1,337 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>鱼之洲 - FishContinent STUDIO</title>
-        <link href="css/styles.css" rel="stylesheet">
-        <!-- INPORT BOX ICONS -->
-        <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-    </head>
-    <body>
-        <!-- HEADER -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鱼之洲 - FishContinent</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            min-height: 100vh;
+            padding: 20px;
+            color: #fff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+        
+        /* 导航栏样式 */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            font-size: 2.5rem;
+            color: #4e89e5;
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #4e89e5, #8a2be2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: #f0f0f0;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: #4e89e5;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #4e89e5;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::after {
+            width: 70%;
+        }
+        
+        .active {
+            color: #4e89e5;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .cta-button {
+            background: linear-gradient(45deg, #4e89e5, #8a2be2);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(78, 137, 229, 0.4);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(78, 137, 229, 0.6);
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+        }
+        
+        .hamburger span {
+            display: block;
+            width: 30px;
+            height: 3px;
+            background: #f0f0f0;
+            margin: 6px 0;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        /* 移动端样式 */
+        @media (max-width: 900px) {
+            .hamburger {
+                display: block;
+            }
+            
+            .hamburger.active span:nth-child(1) {
+                transform: translateY(9px) rotate(45deg);
+            }
+            
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active span:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 90px;
+                left: -100%;
+                width: 100%;
+                flex-direction: column;
+                background: rgba(0, 0, 0, 0.9);
+                text-align: center;
+                padding: 20px 0;
+                gap: 25px;
+                transition: all 0.5s ease;
+                z-index: 1000;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .cta-button {
+                display: none;
+            }
+            
+            .mobile-cta {
+                display: block !important;
+                margin: 20px auto 0;
+                width: 80%;
+            }
+        }
+        
+        /* 内容区域 */
+        .content {
+            text-align: center;
+            padding: 50px 20px;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .highlight {
+            color: #4e89e5;
+            position: relative;
+        }
+        
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(45deg, #4e89e5, #8a2be2);
+            border-radius: 2px;
+        }
+        
+        p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            line-height: 1.7;
+            color: #e0e0e0;
+        }
+        
+        .features {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            width: 280px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: #4e89e5;
+            margin-bottom: 20px;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .mobile-cta {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
         <header>
-            <input type="checkbox" name="check" id="check">
-            <!-- LOGO -->
-            <h1 class="logo">Logo</h1>
-            <!-- NAV -->
-            <nav class="nav">
-                <h1 class="logo">Logo</h1>
-                <div class="divider"></div>
-                    <a href="#">Home</a>
-                    <a href="#">About</a>
-                    <a href="#">Services</a>
-                    <a href="#">Contact</a>
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-code logo-icon5"></i>
+                    <span class="logo-text">FishContinent</span>
+                </div>
+                
+                <ul class="nav-menu">
+                    <li><a href="#" class="nav-link active">首页</a></li>
+                    <li><a href="#" class="nav-link">产品</a></li>
+                    <li><a href="#" class="nav-link">博客</a></li>
+                    <li><a href="#" class="nav-link">关于我们</a></li>
+                    <button class="cta-button">B站账号</button>
+                </ul>
+                
+                <button class="cta-button mobile-cta">B站账号</button>
+                
+                <button class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </nav>
-            <!-- USER FORM BUTTON GROUP -->
-            <div class="user-form-group">
-                <a class="login" href="#">Login</a>
-                <a class="signup" href="#">Sign Up</a>
-                <label for="check">
-                    <i class="bx bx-menu menu"></i>
-                    <i class="bx bx-x close-menu"></i>
-                </label>
-            </div>
         </header>
-        <h1 class="FishContinent">FishContinent - 鱼之洲(导航栏测试)</h1>
-    </body>
+        
+        <div class="content">
+            <h1>鱼之洲 - <span class="highlight">FishContinent</span></h1>
+            <p>FishContinent 官方网站</p>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <i class="fas fa-mobile-alt feature-icon5"></i>
+                    <h3 class="feature-title">卡片</h3>
+                    <p>感觉大脑的褶皱都被抚平了，有种瞬间的释怀感</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-desktop feature-icon"></i>
+                    <h3 class="feature-title">蜂巢</h3>
+                    <p>建群以来我几百万条消息从来没落过，今天这几万条我算是放弃了</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-bolt feature-icon"></i>
+                    <h3 class="feature-title">牛肉</h3>
+                    <p>ⓘ该账号封禁中 - 正经管理谁爬楼啊 - BOOM - Evil原创曲</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        // 阿巴阿巴，关注Neuro-sama喵，哔哩哔哩搜索Vedal和Neuro-sama谢谢喵
+
+    <script>
+        // 汉堡菜单切换功能
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+        
+        // 点击菜单项关闭移动菜单
+        document.querySelectorAll('.nav-link').forEach(item => {
+            item.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
 </html>
